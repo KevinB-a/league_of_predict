@@ -1,0 +1,133 @@
+{% block header %}
+  <!--suppress ALL -->
+<h1>{% block title %}{% endblock %}</h1>
+  {% if g.user %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <meta charset="UTF-8">
+    <title>Predictions</title>
+      <div id="entete">
+    <div class="rectangle" style="width:800px;height:80px;border:1px solid #FFF; padding: 100 px;">
+      <h2>Load an image ..&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+       <form method=post action="/" enctype=multipart/form-data>
+              <input type=file name=file autocomplete="off">
+              <input type=submit value=Submit>
+       </form>
+      </h2>
+      {% if filename %}
+    </div>
+    <img src="{{url_for('static', filename='/img/lol.jpeg')}}" width="100" height="" id="image">
+    <H1>Bienvenue sur league of predict !</H1>
+      </div>
+      {% endif %}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div id="main">
+       <div class="left-col">
+       <form method="post" action='/'>     
+       <h2 id="blueteam">Blue Team</h2>
+       <label for="timeline" id="name">timeline</label>
+       <br>
+       <input type="text" id="name" name="timeline" required minlength="1" maxlength="8" size="10">
+       <br>
+       <br>
+       <label for="blue_destr_tower" id="name" name="blue_destr_tower">Tours detruites</label>
+       <br>
+       <input type="text" id="name" name="blue_destr_tower" required minlength="1" maxlength="8" size="10">
+       <br>
+       <br>
+       <label for="name" id="name">Blue golds</label>
+       <br>
+       <input type="text" id="name" name="bluegold" required
+               minlength="1" maxlength="8" size="10">
+       <br>
+       <br>
+       <label for="name" id="name">K/D/A 1</label>
+       <br>
+       <input type="text" id="name" name="k/d/a1" required
+               minlength="1" maxlength="8" size="10">
+       <br>
+       <br>
+       <label for="name" id="name">K/D/A 2</label>
+       <br>
+       <input type="text" id="name" name="k/d/a2" required
+               minlength="1" maxlength="8" size="10">
+       <br>
+       <br>
+       <label for="name" id="name">K/D/A 3</label>
+       <br>
+       <input type="text" id="name" name="k/d/a3" required minlength="1" maxlength="8" size="10">
+       <br>
+       <br>
+       <label for="name" id="name">K/D/A 4</label>
+       <br>
+       <input type="text" id="name" name="k/d/a4" required minlength="1" maxlength="8" size="10" >
+       <br>
+       <br>
+       <label for="name" id="name">K/D/A 5</label>
+       <br>
+       <input type="text" id="name" name="k/d/a5" required minlength="1" maxlength="8" size="10" >      
+       </div>
+       <div class="center-col">
+         <img src="{{url_for('static', filename='uploads/image.png')}}" alt="", width="100%" align="middle">
+       </div>
+       <div class="right-col">
+       <h2 id="redteam">Red Team</h2>
+       <label for="name" id="name">Tours detruites</label>
+       <br>
+       <input type="text" id="name" name="red_destr_tower" required minlength="1" maxlength="8" size="10">
+       <br>
+       <br>
+       <label for="name" id="name">Red golds</label>
+       <br>
+       <input type="text" id="name" name="redgold" required
+               minlength="1" maxlength="8" size="10">
+       <br>
+       <br>
+       <label for="name" id="name">K/D/A 6</label>
+       <br>
+       <input type="text" id="name" name="k/d/a6" required
+               minlength="1" maxlength="8" size="10">
+       <br>
+       <br>
+       <label for="name" id="name">K/D/A 7</label>
+       <br>
+       <input type="text" id="name" name="k/d/a7" required
+              minlength="1" maxlength="8" size="10" >
+       <br>
+       <br>
+       <label for="name" id="name">K/D/A 8</label>
+       <br>
+       <input type="text" id="name" name="k/d/a8" required minlength="1" maxlength="8" size="10">
+       <br>
+       <br>
+       <label for="name" id="name">K/D/A 9</label>
+       <br>
+       <input type="text" id="name" name="k/d/a9" required
+              minlength="1" maxlength="8" size="10" >
+       <br>
+       <br>
+       <label for="name" id="name">K/D/A 10</label>
+       <br>
+       <input type="text" id="name" name="k/d/a10" required
+              minlength="1" maxlength="8" size="10" >
+        <br>
+        <br>
+        <br>
+       <button type="submit" id="name"> Soumettre les valeurs </button>         
+       </form>   
+       </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+       <div id="footer">
+       <br>
+       <br>
+       <br>
+       <div class="rectangle2" style="width:500px;height:80px;border:1px solid #FFF; padding: 100 px;">
+       <h2> Quelle équipe gagne ? </h2>
+       </div>
+       </div>
+{% endblock %}

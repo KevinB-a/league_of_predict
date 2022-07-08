@@ -1,0 +1,21 @@
+#entete, #menu, #contenu, #footer {padding:1px 0;}
+#entete {background-color:#0C2D48;text-align:center;color: #FFF;}
+#main{width: 100%;margin:auto;}
+#menu{float:left;width:33%;background-color:#0C2D48;}
+#image-center{float:center;width: 33%;background-color:#0C2D48;}
+#contenu {float:right;margin-left:33%;background-color:#0C2D48;}
+#footer {background-color:#0C2D48;text-align:center;clear:both;}
+#image{width: 18%;margin-left: 1480px;margin-top: -147px;padding-right: -15px;}
+body{background-color:#0C2D48;}
+#button{height: 40px;width: 200px;background-color:rgba(171, 131, 11, 0.623);}
+.left-col {float: left;width:25%;background-color:#0C2D48;border-spacing: 50px;}
+.center-col{float: left;width: 50%;background-color:#0C2D48;}
+.right-col {float: left;width: 25%;background-color: #0C2D48;}
+.rectangle {background-color: #0C2D48;float: left;margin-left: 60px;margin-top: 60px;}
+#name {width: 66%;margin-left: 60px;}
+.rectangle2{margin-left: 650px;}
+h1{margin-left:60px;text-decoration: underline;}
+h2, label{color: #FFF;}
+#blueteam{color: #75E6DA;margin-left: 60px;}
+#redteam{color:rgb(162, 20, 20);margin-left: 60px;}
+
