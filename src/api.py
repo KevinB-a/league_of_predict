@@ -21,7 +21,6 @@ sys.path.append('../src')
 from ocr.cropping import crop_numericals
 from ocr.detection import extract_results
 import pandas as pd
-import pickle5 as pickle
 from database import Database
 from PIL import Image
 from config import USER, PASSWORD # Build your own config file

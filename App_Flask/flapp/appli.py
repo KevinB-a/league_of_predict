@@ -4,6 +4,7 @@ from flapp.auth import login_required
 import os
 import joblib
 
+
 bp = Blueprint('web_page', __name__)
 
 UPLOAD_FOLDER = '/home/apprenant/simplon_project/league_of_predicts/App_Flask/flapp/static/uploads'
@@ -14,6 +15,7 @@ ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'png'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -22,10 +24,13 @@ def allowed_file(filename):
 @bp.route('/')
 @login_required
 def index():
-    return render_template('web_page/index.html')
+    predictions_proba = [[0.50, 0.50]]
+    return render_template('web_page/index.html', predictions_proba=predictions_proba)
+
 
 @bp.route('/', methods=['GET', 'POST'])
 def upload_image():
+    predictions_proba = [[0.85, 0.15]]
     timeline = request.form.get('timeline')
     blue_destr_tower = request.form.get('blue_destr_tower')
     blue_gold = request.form.get('bluegold')
@@ -41,11 +46,18 @@ def upload_image():
     k_d_a_8 = request.form.get('k/d/a8')
     k_d_a_9 = request.form.get('k/d/a9')
     k_d_a_10 = request.form.get('k/d/a10')
-    if k_d_a_1 != None and k_d_a_2 != None and k_d_a_3 != None and k_d_a_4 != None and k_d_a_5 != None and k_d_a_6 != None and k_d_a_7 != None and k_d_a_8 != None and k_d_a_9 != None and k_d_a_10 != None: 
-        
+    if k_d_a_1 is not None and k_d_a_2 is not None and k_d_a_3 is not None and k_d_a_4 is not None and k_d_a_5 is not None and k_d_a_6 is not None and k_d_a_7 is not None and k_d_a_8 is not None and k_d_a_9 is not None and k_d_a_10 is not None:
         time = timeline.replace(':', ' ').split()
         timeline = time[0]
         print(timeline)
+
+        int_blue_gold = blue_gold.replace('.', '').replace('k', '00')
+        blue_gold = int_blue_gold
+        print("blue_gold :", blue_gold)
+
+        int_red_gold = red_gold.replace('.', '').replace('k', '00')
+        red_gold = int_red_gold
+        print("red_gold :", red_gold)
 
         blue_1 = k_d_a_1.replace('/', ' ').split()
         kill_1 = blue_1[0]
@@ -106,19 +118,26 @@ def upload_image():
         death_10 = red_5[1]
         assist_10 = red_5[2]
         print('kill_10', kill_10, 'death_10', death_10, 'assist_10', assist_10)
-           
-        list_of_variable = [int(timeline), int(blue_destr_tower), int(red_destr_tower), int(blue_gold), int(red_gold), int(kill_1), int(death_1), int(assist_1), int(kill_2), int(death_2), int(assist_2), int(kill_3), int(death_3), int(assist_3), int(kill_4), int(death_4), int(assist_4), int(kill_5), int(death_5), int(assist_5),
-        int(kill_6), int(death_6), int(assist_6), int(kill_7), int(death_7), int(assist_7), int(kill_8), int(death_8), int(assist_8), int(kill_9), int(death_9), int(assist_9), int(kill_10), int(death_10), int(assist_10)]
-        filepred = "/home/apprenant/simplon_project/league_of_predicts/App_Flask/flapp/xgboost"
+
+        list_of_variable = [int(timeline), int(blue_destr_tower), int(red_destr_tower), int(blue_gold), int(red_gold),
+                            int(kill_1), int(death_1), int(assist_1), int(kill_2), int(death_2), int(assist_2),
+                            int(kill_3), int(death_3), int(assist_3), int(kill_4), int(death_4), int(assist_4),
+                            int(kill_5), int(death_5), int(assist_5),
+                            int(kill_6), int(death_6), int(assist_6), int(kill_7), int(death_7), int(assist_7),
+                            int(kill_8), int(death_8), int(assist_8), int(kill_9), int(death_9), int(assist_9),
+                            int(kill_10), int(death_10), int(assist_10)]
+        filepred = "/home/apprenant/simplon_project/league_of_predicts/xgboost"
         classifier = joblib.load(open(filepred, 'rb'))
         predictions = classifier.predict([list_of_variable])
         predictions_proba = classifier.predict_proba([list_of_variable])
-
         print(predictions)
         print(predictions_proba)
-    
-    print('timeline : ', timeline, 'blue_destr_tower :', blue_destr_tower, 'blue gold : ', blue_gold, 'red_destr_tower :', red_destr_tower, 'red gold: ', red_gold, 'kda1: ', k_d_a_1, 'kda2:', k_d_a_2, 'kda3: ', k_d_a_3, 'kda4: ', k_d_a_4, 'kda5: ', k_d_a_5, 'kda6: ', k_d_a_6, 'kda7: ', k_d_a_7, 'kda8: ', k_d_a_8, 'kda9: ', k_d_a_9, 'kda10: ', k_d_a_10) 
+        return render_template("web_page/index.html", predictions_proba=predictions_proba)
 
+    print('timeline : ', timeline, 'blue_destr_tower :', blue_destr_tower, 'blue gold : ', blue_gold,
+          'red_destr_tower :', red_destr_tower, 'red gold: ', red_gold, 'kda1: ', k_d_a_1, 'kda2:', k_d_a_2, 'kda3: ',
+          k_d_a_3, 'kda4: ', k_d_a_4, 'kda5: ', k_d_a_5, 'kda6: ', k_d_a_6, 'kda7: ', k_d_a_7, 'kda8: ', k_d_a_8,
+          'kda9: ', k_d_a_9, 'kda10: ', k_d_a_10)
 
     if 'file' not in request.files:
         flash('No file part')
@@ -130,21 +149,18 @@ def upload_image():
     if file and allowed_file(file.filename):
         filename = secure_filename('image.png')
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        #print('upload_image filename: ' + filename)
+        # print('upload_image filename: ' + filename)
         flash('Image successfully uploaded and displayed below')
-        return render_template('web_page/index.html', filename=filename)
+        return render_template('web_page/index.html', filename=filename, predictions_proba=predictions_proba)
     else:
         flash('Allowed image types are - png, jpg, jpeg, gif')
         return redirect(request.url)
 
- 
+    # return redirect('web_page/index.html')
+
+
 @app.route('/display/<filename>')
 def display_image():
-    #print('display_image filename: ' + filename)
+    # print('display_image filename: ' + filename)
     return redirect(url_for('static', filename='uploads/image.png'))
 
-
-
-
-
-            

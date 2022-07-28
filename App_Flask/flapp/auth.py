@@ -2,12 +2,10 @@ import functools
 from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
 from werkzeug.security import check_password_hash, generate_password_hash
 from flapp.db import get_db
-import urllib
 from bs4 import BeautifulSoup
 html_doc = 'index.html'
 soup = BeautifulSoup(html_doc, 'html.parser')
 values =soup.find_all('input')
-print(values)
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
