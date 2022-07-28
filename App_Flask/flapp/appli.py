@@ -4,7 +4,6 @@ from flapp.auth import login_required
 import os
 import joblib
 
-
 bp = Blueprint('web_page', __name__)
 
 UPLOAD_FOLDER = '/home/apprenant/simplon_project/league_of_predicts/App_Flask/flapp/static/uploads'
@@ -117,20 +116,6 @@ def upload_image():
 
         print(predictions)
         print(predictions_proba)
-        labels = ["Lose","Win"]
-        data = {
-        'Blue Win' : {
-            'Probabilities' : predictions_proba[0][1]
-        },
-        'Blue lose' : {
-            'Probabilities' : predictions_proba[0][0]
-        },
-        'Prediction' : labels[predictions[0]]
-
-               }
-        print(data)
-
-
     
     print('timeline : ', timeline, 'blue_destr_tower :', blue_destr_tower, 'blue gold : ', blue_gold, 'red_destr_tower :', red_destr_tower, 'red gold: ', red_gold, 'kda1: ', k_d_a_1, 'kda2:', k_d_a_2, 'kda3: ', k_d_a_3, 'kda4: ', k_d_a_4, 'kda5: ', k_d_a_5, 'kda6: ', k_d_a_6, 'kda7: ', k_d_a_7, 'kda8: ', k_d_a_8, 'kda9: ', k_d_a_9, 'kda10: ', k_d_a_10) 
 
@@ -152,7 +137,6 @@ def upload_image():
         flash('Allowed image types are - png, jpg, jpeg, gif')
         return redirect(request.url)
 
-    return redirect('web_page/index.html')
  
 @app.route('/display/<filename>')
 def display_image():
